@@ -28,54 +28,53 @@ namespace Ucreation\JccQuicklinks\Controller;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
+ * Class BaseController
  *
- *
- * @package jcc_quicklinks
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * @package Ucreation\JccQuicklinks
+ * @author Arek van Schaijk <info@ucreation.nl>
  */
 class BaseController extends ActionController {
 
 	/**
-	 * @var SoapClient $api
-	 */ 
-	protected $api;
-	
-	/**
-	 * @var array $extConf
+	 * @var integer
 	 */
-	protected $extConf = false;
+	protected $pid = 0;
 	
 	/**
-	 * Constructor
+	 * @var \SoapClient $api
+	 */ 
+	protected $api = NULL;
+	
+	/**
+	 * @var array
+	 */
+	protected $extConf = FALSE;
+	
+	/**
+	 * Initialize Action
 	 *
 	 * @return void
 	 */
-	public function __construct() {
-		
-		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jcc_quicklinks']);	
+	public function initializeAction() {
+		global $TSFE;
+		$this->pid		= $TSFE->page['uid'];
+		$this->extConf	= unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jcc_quicklinks']);	
 	}
 	
 	/**
 	 * Api
 	 *
-	 * @return SoapClient $api
+	 * @return \SoapClient
 	 */
 	protected function api() {
-		
-		// initialize SoapClient if not loaded yet
-		if(!$this->api) {
-			
+		// Lazy loading
+		if (!$this->api) {
 			try {
-			
-				$this->api = new SoapClient($this->extConf['wsdl']);
-				
+				$this->api = new \SoapClient($this->extConf['wsdl']);
 			} catch(SoapFault $e) {
-				
-				// do something, but what?
+				throw new Exception($e);
 			}
 		}
-		
 		return $this->api;
 	}
 	
@@ -83,23 +82,16 @@ class BaseController extends ActionController {
 	 * TCA Select Product List
 	 *
 	 * @param array $conf
-	 * @return void
+	 * @return array
 	 */
 	public function TCASelectProductList($conf) {
-		
 		$availableProducts = $this->api()->getGovAvailableProducts();
-		
-		// checks if we have an object with products
-		if($availableProducts->products && count($availableProducts->products) > 0) {
-			
-			// loop given object with products
-			foreach($availableProducts->products as $product) {
-				
+		if ($availableProducts->products && count($availableProducts->products) > 0) {
+			foreach ($availableProducts->products as $product) {	
 				$conf['items'][] = array($product->productDesc, $product->productId);
 			}
 		}
-
 		return $conf;
 	}
+	
 }
-?>

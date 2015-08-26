@@ -9,11 +9,9 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, is_product, product, link',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, is_product, product, link,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden, name, is_product, product, link,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
-	'palettes' => array(
-		'1' => array('showitem' => ''),
-	),
+	'palettes' => array(),
 	'columns' => array(
 		'sys_language_uid' => array(
 			'exclude' => 1,
@@ -116,7 +114,7 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 			'displayCond' => 'FIELD:is_product:REQ:true',
 			'config' => array(
 				'type' => 'select',
-				'itemsProcFunc' => 'Tx_JccQuicklinks_Controller_BaseController->TCASelectProductList',
+				'itemsProcFunc' => 'Ucreation\\JccQuicklinks\\Controller\\BaseController->TCASelectProductList',
 				'items' => array(
 					array('LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tx_jccquicklinks_domain_model_link.product.0', 0),
 				),
@@ -127,23 +125,21 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tx_jccquicklinks_domain_model_link.link',
 			'displayCond' => 'FIELD:is_product:REQ:false',
 			'config' => array(
-			'type' => 'input',
-			'size' => 30,
-			'eval' => 'trim,required',
-			'wizards' => array(
-				'_PADDING' => 2,
-				'link' => array(
-				'type' => 'popup',
-				'title' => 'Link',
-				'icon' => 'link_popup.gif',
-				'script' => 'browse_links.php?mode=wizard',
-				'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-				)
-			),
-			'softref' => 'typolink[linkList]'
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required',
+				'wizards' => array(
+					'_PADDING' => 2,
+					'link' => array(
+						'type' => 'popup',
+						'title' => 'Link',
+						'icon' => 'link_popup.gif',
+						'script' => 'browse_links.php?mode=wizard',
+						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+					),
+				),
+				'softref' => 'typolink[linkList]'
 			),
 		),
 	),
 );
-
-?>

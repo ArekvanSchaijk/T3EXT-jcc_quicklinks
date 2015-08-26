@@ -29,11 +29,10 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
+ * Class LinkRepository
  *
- *
- * @package jcc_quicklinks
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * @package Ucreation\JccQuicklinks
+ * @author Arek van Schaijk <info@ucreation.nl>
  */
 class LinkRepository extends Repository {
 
@@ -51,13 +50,14 @@ class LinkRepository extends Repository {
 	/**
 	 * Find Links By Pid
 	 *
-	 * @return \Ucreation\JccQuicklinks\Domain\Model\Link $query
+	 * @param integer $pid
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	public function findLinksByPid($pid) {
 		$query = $this->createQuery();
 		$query->setOrderings(array('sorting' => QueryInterface::ORDER_ASCENDING));
-		$query->matching($query->equals('page', $pid));
+		$query->matching($query->equals('page', (int)$pid));
 		return $query->execute();
 	}
+	
 }
-?>

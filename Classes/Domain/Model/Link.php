@@ -28,60 +28,49 @@ namespace Ucreation\JccQuicklinks\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
+ * Class Link
  *
- *
- * @package jcc_quicklinks
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * @package Ucreation\JccQuicklinks
+ * @author Arek van Schaijk <info@ucreation.nl>
  */
 class Link extends AbstractEntity {
 
 	/**
-	 * name
-	 *
 	 * @var string
 	 */
-	protected $name;
+	protected $name = '';
 
 	/**
-	 * isProduct
-	 *
 	 * @var boolean
 	 */
 	protected $isProduct = FALSE;
 
 	/**
-	 * product
-	 *
 	 * @var integer
 	 */
-	protected $product;
+	protected $product = 0;
 
 	/**
-	 * link
-	 *
 	 * @var string
 	 */
-	protected $link;
+	protected $link = '';
 	
 	/**
-	 * page
-	 *
 	 * @var integer
 	 */
-	protected $page;
+	protected $page = 0;
 
 	/**
-	 * Returns the name
+	 * Get Name
 	 *
-	 * @return string $name
+	 * @return string
 	 */
 	public function getName() {
 		return $this->name;
 	}
 
 	/**
-	 * Sets the name
+	 * Set Name
 	 *
 	 * @param string $name
 	 * @return void
@@ -91,16 +80,16 @@ class Link extends AbstractEntity {
 	}
 
 	/**
-	 * Returns the isProduct
+	 * Get Is Product
 	 *
-	 * @return boolean $isProduct
+	 * @return boolean
 	 */
 	public function getIsProduct() {
 		return $this->isProduct;
 	}
 
 	/**
-	 * Sets the isProduct
+	 * Set Is Product
 	 *
 	 * @param boolean $isProduct
 	 * @return void
@@ -110,7 +99,7 @@ class Link extends AbstractEntity {
 	}
 
 	/**
-	 * Returns the boolean state of isProduct
+	 * Is Is Product
 	 *
 	 * @return boolean
 	 */
@@ -119,16 +108,16 @@ class Link extends AbstractEntity {
 	}
 
 	/**
-	 * Returns the product
+	 * Get Product
 	 *
-	 * @return integer $product
+	 * @return integer
 	 */
 	public function getProduct() {
 		return $this->product;
 	}
 
 	/**
-	 * Sets the product
+	 * Set Product
 	 *
 	 * @param integer $product
 	 * @return void
@@ -138,16 +127,16 @@ class Link extends AbstractEntity {
 	}
 
 	/**
-	 * Returns the link
+	 * Get Link
 	 *
-	 * @return string $link
+	 * @return string
 	 */
 	public function getLink() {
 		return $this->link;
 	}
 
 	/**
-	 * Sets the link
+	 * Set Link
 	 *
 	 * @param string $link
 	 * @return void
@@ -157,16 +146,16 @@ class Link extends AbstractEntity {
 	}
 	
 	/**
-	 * Returns the page
+	 * Get Page
 	 *
-	 * @return integer $page
+	 * @return integer
 	 */
 	public function getPage() {
 		return $this->page;
 	}
 
 	/**
-	 * Sets the page
+	 * Set Page
 	 *
 	 * @param integer $page
 	 * @return void
@@ -174,5 +163,5 @@ class Link extends AbstractEntity {
 	public function setPage($page) {
 		$this->page = $page;
 	}
+	
 }
-?>

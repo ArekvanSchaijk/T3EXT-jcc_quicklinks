@@ -3,11 +3,11 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-// get extension configuration
+// gets the extension configuration
 $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jcc_quicklinks']);
 
+// register plugin
 if(!$confArr['disableFrontendPlugin']) {
-	
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 		$_EXTKEY,
 		'Pi1',
@@ -15,39 +15,10 @@ if(!$confArr['disableFrontendPlugin']) {
 	);
 }
 
+// add plugin configuration
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'JCC Quicklinks');
 
-if($confArr['enableTitle']) {
-	$tempColumns['tx_jccquicklinks_title'] = array(
-		'exclude' => 0,
-		'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks.tx_jccquicklinks_title',
-		'config' => array(
-			'type' => 'input',
-			'size' => 30,
-			'eval' => 'trim'
-		),
-	);
-}
-
-$tempColumns['tx_jccquicklinks_links'] = array(
-	'exclude' => 0,
-	'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks.tx_jccquicklinks_links',
-	'config' => array(
-		'type' => 'inline',
-		'foreign_table' => 'tx_jccquicklinks_domain_model_link',
-		'foreign_field' => 'page',
-		'maxitems'      => 9999,
-		'appearance' => array(
-			'collapseAll' => 1,
-			'expandSingle' => 1,
-			'levelLinksPosition' => 'top',
-			'showSynchronizationLink' => 1,
-			'showPossibleLocalizationRecords' => 1,
-			'showAllLocalizationLink' => 1
-		),
-	),
-);
-
+// register table tx_jccquicklinks_domain_model_link
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_jccquicklinks_domain_model_link');
 $TCA['tx_jccquicklinks_domain_model_link'] = array(
 	'ctrl' => array(
@@ -78,5 +49,32 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 	),
 );
 
+if($confArr['enableTitle']) {
+	$tempColumns['tx_jccquicklinks_title'] = array(
+		'exclude' => 0,
+		'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks.tx_jccquicklinks_title',
+		'config' => array(
+			'type' => 'input',
+			'size' => 30,
+			'eval' => 'trim'
+		),
+	);
+}
+
+// extends page table
+$tempColumns['tx_jccquicklinks_links'] = array(
+	'exclude' => 0,
+	'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks.tx_jccquicklinks_links',
+	'config' => array(
+		'type' => 'inline',
+		'foreign_table' => 'tx_jccquicklinks_domain_model_link',
+		'foreign_field' => 'page',
+		'maxitems' => 25,
+		'appearance' => array(
+			'collapseAll'	=> 1,
+			'expandSingle'	=> 1,
+		),
+	),
+);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', $tempColumns, 1);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', '--div--;LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks,tx_jccquicklinks_title,tx_jccquicklinks_links');

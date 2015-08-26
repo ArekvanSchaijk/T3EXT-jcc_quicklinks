@@ -10,7 +10,6 @@ CREATE TABLE pages (
 # Table structure for table 'tx_jccquicklinks_domain_model_link'
 #
 CREATE TABLE tx_jccquicklinks_domain_model_link (
-
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
@@ -19,7 +18,7 @@ CREATE TABLE tx_jccquicklinks_domain_model_link (
 	product int(11) DEFAULT '0' NOT NULL,
 	link varchar(255) DEFAULT '' NOT NULL,
 	page int(11) unsigned DEFAULT '0',
-
+	
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
@@ -48,5 +47,4 @@ CREATE TABLE tx_jccquicklinks_domain_model_link (
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
 	KEY language (l10n_parent,sys_language_uid)
-
 );
