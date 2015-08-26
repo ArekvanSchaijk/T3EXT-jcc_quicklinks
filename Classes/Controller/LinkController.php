@@ -1,4 +1,5 @@
 <?php
+namespace Ucreation\JccQuicklinks\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_JccQuicklinks_Controller_LinkController extends Tx_JccQuicklinks_Controller_BaseController {
+class LinkController extends BaseController {
 
 	/**
 	 * pid
@@ -43,7 +44,7 @@ class Tx_JccQuicklinks_Controller_LinkController extends Tx_JccQuicklinks_Contro
 	/**
 	 * linkRepository
 	 *
-	 * @var Tx_JccQuicklinks_Domain_Repository_LinkRepository
+	 * @var \Ucreation\JccQuicklinks\Domain\Repository\LinkRepository
 	 */
 	protected $linkRepository;
 	
@@ -80,10 +81,10 @@ class Tx_JccQuicklinks_Controller_LinkController extends Tx_JccQuicklinks_Contro
 	/**
 	 * injectLinkRepository
 	 *
-	 * @param Tx_JccQuicklinks_Domain_Repository_LinkRepository $linkRepository
+	 * @param \Ucreation\JccQuicklinks\Domain\Repository\LinkRepository $linkRepository
 	 * @return void
 	 */
-	public function injectLinkRepository(Tx_JccQuicklinks_Domain_Repository_LinkRepository $linkRepository) {
+	public function injectLinkRepository(\Ucreation\JccQuicklinks\Domain\Repository\LinkRepository $linkRepository) {
 		$this->linkRepository = $linkRepository;
 	}
 	

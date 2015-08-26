@@ -1,4 +1,5 @@
 <?php
+namespace Ucreation\JccQuicklinks\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -24,6 +25,8 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  *
  *
@@ -31,7 +34,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_JccQuicklinks_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEntity {
+class Link extends AbstractEntity {
 
 	/**
 	 * name

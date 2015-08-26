@@ -1,4 +1,5 @@
 <?php
+namespace Ucreation\JccQuicklinks\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -24,6 +25,8 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /**
  *
  *
@@ -31,7 +34,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_JccQuicklinks_Controller_BaseController extends Tx_Extbase_MVC_Controller_ActionController {
+class BaseController extends ActionController {
 
 	/**
 	 * @var SoapClient $api

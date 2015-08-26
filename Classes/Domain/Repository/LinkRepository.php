@@ -1,4 +1,5 @@
 <?php
+namespace Ucreation\JccQuicklinks\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -24,6 +25,9 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+
 /**
  *
  *
@@ -31,28 +35,27 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_JccQuicklinks_Domain_Repository_LinkRepository extends Tx_Extbase_Persistence_Repository {
+class LinkRepository extends Repository {
 
-	/**
+ 	/**
 	 * Initialize Object
 	 *
 	 * @return void
 	 */
 	public function initializeObject() {
-		
-		$this->defaultQuerySettings = $this->objectManager->create('Tx_Extbase_Persistence_Typo3QuerySettings');
-		$this->defaultQuerySettings->setRespectStoragePage(FALSE);
+		$defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+		$defaultQuerySettings->setRespectStoragePage(FALSE);
+		$this->setDefaultQuerySettings($defaultQuerySettings);
 	}
 	
 	/**
 	 * Find Links By Pid
 	 *
-	 * @return Tx_JccQuicklinks_Domain_Model_Link $query
+	 * @return \Ucreation\JccQuicklinks\Domain\Model\Link $query
 	 */
 	public function findLinksByPid($pid) {
-		
 		$query = $this->createQuery();
-		$query->setOrderings(array('sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
+		$query->setOrderings(array('sorting' => QueryInterface::ORDER_ASCENDING));
 		$query->matching($query->equals('page', $pid));
 		return $query->execute();
 	}
