@@ -1,0 +1,26 @@
+<f:if condition="{links}">
+  <f:if condition="{altTitle}">
+    <f:then>
+      <h1>{altTitle}</h1>
+    </f:then>
+    <f:else>
+      <h1>Externe links</h1>
+    </f:else>
+  </f:if>
+  <ul>
+    <f:for each="{links}" as="link">
+      <li>
+        <f:if condition="{0:link.type} == {0:'product'}">
+          <f:then>
+            <f:link.action pageUid="{settings.formPid}" action="addProduct" extensionName="JccAppointments" arguments="{product : link.productId}">{link.name}</f:link.action>
+          </f:then>
+          <f:else>
+            <f:if condition="{0:link.type} == {0:'page'}"><f:link.page pageUid="{link.path}">{link.name}</f:link.page></f:if>
+            <f:if condition="{0:link.type} == {0:'mail'}"><f:link.email email="{link.path}">{link.name}</f:link.email></f:if>
+            <f:if condition="{0:link.type} == {0:'external'}"><f:link.external uri="{link.path}">{link.name}</f:link.external></f:if>
+          </f:else>
+        </f:if>
+      </li>
+    </f:for>
+  </ul>
+</f:if>

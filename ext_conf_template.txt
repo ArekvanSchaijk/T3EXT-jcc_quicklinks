@@ -1,0 +1,12 @@
+# ***************************************************************************************
+# Extension configuration variables for htmlArea RTE
+# ***************************************************************************************
+
+# cat=basic; type=string; label=JCC WSDL:Web Service Definition Language URL
+wsdl = http://service.jccsoftware.nl/GenericGuidanceSystemService2/GenericGuidanceSystem2.asmx?wsdl
+
+# cat=basic; type=boolean; label=Title field: Enable this field in the back-end
+enableTitle = 1
+
+# cat=basic; type=boolean; label=Disable front-end plugin: Check to disable the front-end plugin
+disableFrontendPlugin = 0

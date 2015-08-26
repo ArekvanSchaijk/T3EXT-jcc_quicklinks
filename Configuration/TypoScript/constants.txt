@@ -1,0 +1,10 @@
+plugin.tx_jccquicklinks {
+	view {
+		# cat=plugin.tx_jccquicklinks/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:jcc_quicklinks/Resources/Private/Templates/
+	}
+	settings {
+		# cat=plugin.tx_jccquicklinks/a; type=integer; label=Form Pid:The Page Uid where the JCC Appointments form is located
+		formPid = 
+	}
+}
