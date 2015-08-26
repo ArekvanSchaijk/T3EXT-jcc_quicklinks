@@ -50,7 +50,6 @@ $tempColumns['tx_jccquicklinks_links'] = array(
 	),
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_jccquicklinks_domain_model_link', 'EXT:jcc_quicklinks/Resources/Private/Language/locallang_csh_tx_jccquicklinks_domain_model_link.xml');
 t3lib_extMgm::allowTableOnStandardPages('tx_jccquicklinks_domain_model_link');
 $TCA['tx_jccquicklinks_domain_model_link'] = array(
 	'ctrl' => array(
@@ -60,6 +59,7 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
+		'hideTable' => TRUE,
 		'dividers2tabs' => TRUE,
 		'sortby' => 'sorting',
 		'versioningWS' => 2,
