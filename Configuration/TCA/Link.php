@@ -93,7 +93,7 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 		),
 		'name' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tx_jccquicklinks_domain_model_link.name',
+			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tx_jccquicklinks_domain_model_link.name',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -102,7 +102,7 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 		),
 		'is_product' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tx_jccquicklinks_domain_model_link.is_product',
+			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tx_jccquicklinks_domain_model_link.is_product',
 			'config' => array(
 				'type' => 'check',
 				'default' => 1
@@ -110,19 +110,19 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 		),
 		'product' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tx_jccquicklinks_domain_model_link.product',
+			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tx_jccquicklinks_domain_model_link.product',
 			'displayCond' => 'FIELD:is_product:REQ:true',
 			'config' => array(
 				'type' => 'select',
 				'itemsProcFunc' => 'Ucreation\\JccQuicklinks\\Controller\\BaseController->TCASelectProductList',
 				'items' => array(
-					array('LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tx_jccquicklinks_domain_model_link.product.0', 0),
+					array('LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tx_jccquicklinks_domain_model_link.product.0', 0),
 				),
 			),
 		),
 		'link' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tx_jccquicklinks_domain_model_link.link',
+			'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tx_jccquicklinks_domain_model_link.link',
 			'displayCond' => 'FIELD:is_product:REQ:false',
 			'config' => array(
 				'type' => 'input',

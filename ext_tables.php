@@ -23,7 +23,7 @@ if(!$confArr['disableFrontendPlugin']) {
 $TCA['tx_jccquicklinks_domain_model_link'] = array(
 	'ctrl' => array(
 		'requestUpdate' => 'is_product',
-		'title'	=> 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tx_jccquicklinks_domain_model_link',
+		'title'	=> 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tx_jccquicklinks_domain_model_link',
 		'label' => 'name',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -52,7 +52,7 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 if($confArr['enableTitle']) {
 	$tempColumns['tx_jccquicklinks_title'] = array(
 		'exclude' => 0,
-		'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks.tx_jccquicklinks_title',
+		'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tabs.jccquicklinks.tx_jccquicklinks_title',
 		'config' => array(
 			'type' => 'input',
 			'size' => 30,
@@ -64,7 +64,7 @@ if($confArr['enableTitle']) {
 // extends page table
 $tempColumns['tx_jccquicklinks_links'] = array(
 	'exclude' => 0,
-	'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks.tx_jccquicklinks_links',
+	'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tabs.jccquicklinks.tx_jccquicklinks_links',
 	'config' => array(
 		'type' => 'inline',
 		'foreign_table' => 'tx_jccquicklinks_domain_model_link',
@@ -77,4 +77,4 @@ $tempColumns['tx_jccquicklinks_links'] = array(
 	),
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', $tempColumns, 1);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', '--div--;LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks,tx_jccquicklinks_title,tx_jccquicklinks_links');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', '--div--;LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xlf:tabs.jccquicklinks,tx_jccquicklinks_title,tx_jccquicklinks_links');
