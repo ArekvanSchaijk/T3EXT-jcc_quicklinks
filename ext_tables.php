@@ -8,18 +8,16 @@ $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jcc_quickl
 
 if(!$confArr['disableFrontendPlugin']) {
 	
-	Tx_Extbase_Utility_Extension::registerPlugin(
+	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 		$_EXTKEY,
 		'Pi1',
 		'JCC Quicklinks'
 	);
 }
 
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'JCC Quicklinks');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'JCC Quicklinks');
 
-// if the title is enabled
 if($confArr['enableTitle']) {
-	
 	$tempColumns['tx_jccquicklinks_title'] = array(
 		'exclude' => 0,
 		'label' => 'LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks.tx_jccquicklinks_title',
@@ -50,7 +48,7 @@ $tempColumns['tx_jccquicklinks_links'] = array(
 	),
 );
 
-t3lib_extMgm::allowTableOnStandardPages('tx_jccquicklinks_domain_model_link');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_jccquicklinks_domain_model_link');
 $TCA['tx_jccquicklinks_domain_model_link'] = array(
 	'ctrl' => array(
 		'requestUpdate' => 'is_product',
@@ -75,14 +73,10 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 			'endtime' => 'endtime',
 		),
 		'searchFields' => 'name,',
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Link.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_jccquicklinks_domain_model_link.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Link.php',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_jccquicklinks_domain_model_link.gif'
 	),
 );
 
-
-t3lib_div::loadTCA('pages');
-t3lib_extMgm::addTCAcolumns('pages', $tempColumns, 1);
-t3lib_extMgm::addToAllTCAtypes('pages', '--div--;LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks,tx_jccquicklinks_title,tx_jccquicklinks_links');
-
-?>
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', $tempColumns, 1);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', '--div--;LLL:EXT:jcc_quicklinks/Resources/Private/Language/locallang_db.xml:tabs.jccquicklinks,tx_jccquicklinks_title,tx_jccquicklinks_links');
