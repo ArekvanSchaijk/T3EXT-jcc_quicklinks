@@ -16,5 +16,16 @@
 			<label index="tx_jccquicklinks_domain_model_link.product.0">-- select --</label>
 			<label index="tx_jccquicklinks_domain_model_link.link">Link</label>
 		</languageKey>
+		<languageKey index="nl" type="array">
+            <label index="tabs.jccquicklinks">JCC Snel- links</label>
+			<label index="tabs.jccquicklinks.tx_jccquicklinks_title">Alternatieve titel</label>
+			<label index="tabs.jccquicklinks.tx_jccquicklinks_links">Links</label>
+			<label index="tx_jccquicklinks_domain_model_link">Link</label>
+			<label index="tx_jccquicklinks_domain_model_link.name">Naam</label>
+			<label index="tx_jccquicklinks_domain_model_link.is_product">Link naar product?</label>
+			<label index="tx_jccquicklinks_domain_model_link.product">Kies product</label>
+			<label index="tx_jccquicklinks_domain_model_link.product.0">-- selecteer --</label>
+			<label index="tx_jccquicklinks_domain_model_link.link">Link</label>
+		</languageKey>
 	</data>
 </T3locallang>

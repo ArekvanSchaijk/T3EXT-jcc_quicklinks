@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "jcc_quicklinks".
 #
-# Auto generated 26-08-2015 19:16
+# Auto generated 26-08-2015 19:17
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Quicklinks for the extension jcc_appointments',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '1.0.1',
+	'version' => '1.0.2',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
