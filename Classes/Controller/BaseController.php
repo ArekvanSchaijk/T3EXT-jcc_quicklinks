@@ -25,6 +25,7 @@ namespace Ucreation\JccQuicklinks\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Ucreation\JccQuicklinks\Exception;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
