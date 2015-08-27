@@ -27,6 +27,8 @@ namespace Ucreation\JccQuicklinks\Controller;
 
 use Ucreation\JccQuicklinks\Exception;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Class BaseController
@@ -49,17 +51,16 @@ class BaseController extends ActionController {
 	/**
 	 * @var array
 	 */
-	protected $extConf = FALSE;
+	protected $jccSettings = NULL;
 	
 	/**
 	 * Initialize Action
 	 *
 	 * @return void
 	 */
-	public function initializeAction() {
+	public function initializeAciton() {
 		global $TSFE;
 		$this->pid		= $TSFE->page['uid'];
-		$this->extConf	= unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jcc_quicklinks']);	
 	}
 	
 	/**
@@ -71,12 +72,53 @@ class BaseController extends ActionController {
 		// Lazy loading
 		if (!$this->api) {
 			try {
-				$this->api = new \SoapClient($this->extConf['wsdl']);
+				$this->api = new \SoapClient($this->getWsdlUrl());
 			} catch(SoapFault $e) {
 				throw new Exception($e);
 			}
 		}
 		return $this->api;
+	}
+	
+	/**
+	 * Get Wsdl Url
+	 *
+	 * @return string
+	 */
+	protected function getWsdlUrl() {
+		$this->retrieveJccSettings();
+		return $this->jccSettings['soap']['wsdl'];
+	}
+	
+	
+	
+	/**
+	 * Retrieve Jcc Settings
+	 *
+	 * @return array
+	 */
+	protected function retrieveJccSettings() {
+		if (!$this->jccSettings) {
+			$configurationManager = $this->getObjectManager()->get('TYPO3\\CMS\Extbase\\Configuration\\ConfigurationManagerInterface');
+			$configuration = $configurationManager->getConfiguration(
+				ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+				'JccAppointments'
+			);
+			$this->jccSettings = $configuration['settings'];
+		}
+		return $this->jccSettings;
+	}
+	
+	/**
+	 * Get Object Manager
+	 *
+	 * @return \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected function getObjectManager() {
+		if ($this->objectManager) {
+			return $this->objectManager;
+		}
+		return GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 	}
 	
 	/**
