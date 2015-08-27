@@ -1,4 +1,5 @@
 <?php
+namespace Ucreation\JccQuicklinks\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -25,134 +26,91 @@
  ***************************************************************/
 
 /**
+ * Class LinkController
  *
- *
- * @package jcc_quicklinks
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * @package Ucreation\JccQuicklinks
+ * @author Arek van Schaijk <info@ucreation.nl>
  */
-class Tx_JccQuicklinks_Controller_LinkController extends Tx_JccQuicklinks_Controller_BaseController {
-
+class LinkController extends BaseController {
+	
 	/**
-	 * pid
+	 * @const string
+	 */
+	const	TYPE_PRODUCT	= 'product',
+			TYPE_MAIL		= 'mail',
+			TYPE_PAGE		= 'page',
+			TYPE_EXTERNAL	= 'external';
+	
+	/**
+	 * @var \Ucreation\JccQuicklinks\Domain\Repository\LinkRepository
+	 * @inject
+	 */
+	protected $linkRepository = NULL;
+	
+	/**
+	 * Constructor
 	 *
-	 * @var integer $pid
-	 */
-	private $pid;
-	
-	/**
-	 * linkRepository
-	 *
-	 * @var Tx_JccQuicklinks_Domain_Repository_LinkRepository
-	 */
-	protected $linkRepository;
-	
-	/**
-	 * @const string TYPE_PRODUCT
-	 */
-	const TYPE_PRODUCT = 'product';
-	
-	/**
-	 * @const string TYPE_MAIL
-	 */
-	const TYPE_MAIL = 'mail';
-	
-	/**
-	 * @const string TYPE_PAGE
-	 */
-	const TYPE_PAGE = 'page';
-	
-	/**
-	 * @const string TYPE_EXTERNAL
-	 */
-	const TYPE_EXTERNAL = 'external';
-	
-	/**
-	 * Construct
-	 *
+	 * @global \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $TSFE
 	 * @return void
 	 */
 	public function __construct() {
-		
-		$this->pid = $GLOBALS['TSFE']->page['uid'];
-	}
-
-	/**
-	 * injectLinkRepository
-	 *
-	 * @param Tx_JccQuicklinks_Domain_Repository_LinkRepository $linkRepository
-	 * @return void
-	 */
-	public function injectLinkRepository(Tx_JccQuicklinks_Domain_Repository_LinkRepository $linkRepository) {
-		$this->linkRepository = $linkRepository;
+		global $TSFE;
+		$this->pid = $TSFE->page['uid'];
 	}
 	
 	/**
-	 * action list
+	 * List Action
 	 *
+	 * @global \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $TSFE
 	 * @return void
 	 */
 	public function listAction() {
+		
+		global $TSFE;
 
 		$linksArray = array();
 		
-		// get quicklinks for current $pid
+		// gets all quicklinks from the repository
 		$links = $this->linkRepository->findLinksByPid($this->pid);
-		
-		// loop all links and generate some custom array
-		foreach($links as $link) {
+
+		foreach ($this->linkRepository->findLinksByPid($this->pid) as $link) {
 			
-			// product link
-			if($link->isIsProduct()) {
+			// when there is an product set
+			if ($link->isIsProduct()) {
 				
-				// we dont have a link path
 				$linkPath = NULL;
-				
-				// product id
 				$productId = $link->getProduct();
-				
-				// link type
 				$linkType = self::TYPE_PRODUCT;
 			
-			// custom link	
+			// when there is an custom link created
 			} else {
 				
-				// link path
 				$linkPath = $link->getLink();
-				
-				// we dont have a product id
 				$productId = NULL;
 				
-				// page link
-				if(ctype_digit($linkPath)) {
-					
+				// link to an page
+				if (ctype_digit($linkPath)) {
 					$linkType = self::TYPE_PAGE;
-				
-				// mailto link	
-				} else if(strpos($linkPath, '@') !== false) {
-					
+				// link to an email
+				} else if (strpos($linkPath, '@') !== FALSE) {
 					$linkType = self::TYPE_MAIL;
-				
-				// external link	
+				// link to an external address	
 				} else {
-					
 					$linkType = self::TYPE_EXTERNAL;
 				}
 			}
 			
 			$linksArray[] = array(
-				'name' => $link->getName(),
-				'path' => $linkPath,
-				'productId' => $productId,
-				'type' => $linkType,
+				'name'		=> $link->getName(),
+				'path'		=> $linkPath,
+				'productId'	=> $productId,
+				'type'		=> $linkType,
 			);
 		}
-		
-		// override $links
-		$links = $linksArray;
 
-		$this->view->assign('links', $links);
-		$this->view->assign('altTitle', $GLOBALS['TSFE']->page['tx_jccquicklinks_title']);
+		// view allocations
+		$this->view->assign('links', $linksArray);
+		$this->view->assign('altTitle', $TSFE->page['tx_jccquicklinks_title']);
 	}
+	
 }
-?>

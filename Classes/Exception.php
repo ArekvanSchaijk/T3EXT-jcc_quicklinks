@@ -1,10 +1,10 @@
 <?php
-namespace Ucreation\JccQuicklinks\Domain\Repository;
+namespace Ucreation\JccQuicklinks;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Arek van Schaijk <info@ucreation.nl>, Ucreation
+ *  (c) 2015 Arek van Schaijk <info@ucreation.nl>, Ucreation
  *  
  *  All rights reserved
  *
@@ -25,39 +25,12 @@ namespace Ucreation\JccQuicklinks\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-
 /**
- * Class LinkRepository
+ * Class Exception
  *
  * @package Ucreation\JccQuicklinks
  * @author Arek van Schaijk <info@ucreation.nl>
  */
-class LinkRepository extends Repository {
-
- 	/**
-	 * Initialize Object
-	 *
-	 * @return void
-	 */
-	public function initializeObject() {
-		$defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
-		$defaultQuerySettings->setRespectStoragePage(FALSE);
-		$this->setDefaultQuerySettings($defaultQuerySettings);
-	}
-	
-	/**
-	 * Find Links By Pid
-	 *
-	 * @param integer $pid
-	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
-	 */
-	public function findLinksByPid($pid) {
-		$query = $this->createQuery();
-		$query->setOrderings(array('sorting' => QueryInterface::ORDER_ASCENDING));
-		$query->matching($query->equals('page', (int)$pid));
-		return $query->execute();
-	}
+class Exception extends \TYPO3\CMS\Core\Exception {
 	
 }

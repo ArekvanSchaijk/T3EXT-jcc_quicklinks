@@ -1,4 +1,5 @@
 <?php
+namespace Ucreation\JccQuicklinks\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -24,79 +25,116 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Ucreation\JccQuicklinks\Exception;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+
 /**
+ * Class BaseController
  *
- *
- * @package jcc_quicklinks
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * @package Ucreation\JccQuicklinks
+ * @author Arek van Schaijk <info@ucreation.nl>
  */
-class Tx_JccQuicklinks_Controller_BaseController extends Tx_Extbase_MVC_Controller_ActionController {
+class BaseController extends ActionController {
 
 	/**
-	 * @var SoapClient $api
-	 */ 
-	protected $api;
-	
-	/**
-	 * @var array $extConf
+	 * @var integer
 	 */
-	protected $extConf = false;
+	protected $pid = 0;
 	
 	/**
-	 * Constructor
+	 * @var \SoapClient $api
+	 */ 
+	protected $api = NULL;
+	
+	/**
+	 * @var array
+	 */
+	protected $jccSettings = NULL;
+	
+	/**
+	 * Initialize Action
 	 *
 	 * @return void
 	 */
-	public function __construct() {
-		
-		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jcc_quicklinks']);	
+	public function initializeAciton() {
+		global $TSFE;
+		$this->pid		= $TSFE->page['uid'];
 	}
 	
 	/**
 	 * Api
 	 *
-	 * @return SoapClient $api
+	 * @return \SoapClient
 	 */
 	protected function api() {
-		
-		// initialize SoapClient if not loaded yet
-		if(!$this->api) {
-			
+		// Lazy loading
+		if (!$this->api) {
 			try {
-			
-				$this->api = new SoapClient($this->extConf['wsdl']);
-				
+				$this->api = new \SoapClient($this->getWsdlUrl());
 			} catch(SoapFault $e) {
-				
-				// do something, but what?
+				throw new Exception($e);
 			}
 		}
-		
 		return $this->api;
+	}
+	
+	/**
+	 * Get Wsdl Url
+	 *
+	 * @return string
+	 */
+	protected function getWsdlUrl() {
+		$this->retrieveJccSettings();
+		return $this->jccSettings['soap']['wsdl'];
+	}
+	
+	
+	
+	/**
+	 * Retrieve Jcc Settings
+	 *
+	 * @return array
+	 */
+	protected function retrieveJccSettings() {
+		if (!$this->jccSettings) {
+			$configurationManager = $this->getObjectManager()->get('TYPO3\\CMS\Extbase\\Configuration\\ConfigurationManagerInterface');
+			$configuration = $configurationManager->getConfiguration(
+				ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+				'JccAppointments'
+			);
+			$this->jccSettings = $configuration['settings'];
+		}
+		return $this->jccSettings;
+	}
+	
+	/**
+	 * Get Object Manager
+	 *
+	 * @return \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected function getObjectManager() {
+		if ($this->objectManager) {
+			return $this->objectManager;
+		}
+		return GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 	}
 	
 	/**
 	 * TCA Select Product List
 	 *
 	 * @param array $conf
-	 * @return void
+	 * @return array
 	 */
 	public function TCASelectProductList($conf) {
-		
 		$availableProducts = $this->api()->getGovAvailableProducts();
-		
-		// checks if we have an object with products
-		if($availableProducts->products && count($availableProducts->products) > 0) {
-			
-			// loop given object with products
-			foreach($availableProducts->products as $product) {
-				
+		if ($availableProducts->products && count($availableProducts->products) > 0) {
+			foreach ($availableProducts->products as $product) {	
 				$conf['items'][] = array($product->productDesc, $product->productId);
 			}
 		}
-
 		return $conf;
 	}
+	
 }
-?>

@@ -1,4 +1,5 @@
 <?php
+namespace Ucreation\JccQuicklinks\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -24,61 +25,52 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
+ * Class Link
  *
- *
- * @package jcc_quicklinks
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * @package Ucreation\JccQuicklinks
+ * @author Arek van Schaijk <info@ucreation.nl>
  */
-class Tx_JccQuicklinks_Domain_Model_Link extends Tx_Extbase_DomainObject_AbstractEntity {
+class Link extends AbstractEntity {
 
 	/**
-	 * name
-	 *
 	 * @var string
 	 */
-	protected $name;
+	protected $name = '';
 
 	/**
-	 * isProduct
-	 *
 	 * @var boolean
 	 */
 	protected $isProduct = FALSE;
 
 	/**
-	 * product
-	 *
 	 * @var integer
 	 */
-	protected $product;
+	protected $product = 0;
 
 	/**
-	 * link
-	 *
 	 * @var string
 	 */
-	protected $link;
+	protected $link = '';
 	
 	/**
-	 * page
-	 *
 	 * @var integer
 	 */
-	protected $page;
+	protected $page = 0;
 
 	/**
-	 * Returns the name
+	 * Get Name
 	 *
-	 * @return string $name
+	 * @return string
 	 */
 	public function getName() {
 		return $this->name;
 	}
 
 	/**
-	 * Sets the name
+	 * Set Name
 	 *
 	 * @param string $name
 	 * @return void
@@ -88,16 +80,16 @@ class Tx_JccQuicklinks_Domain_Model_Link extends Tx_Extbase_DomainObject_Abstrac
 	}
 
 	/**
-	 * Returns the isProduct
+	 * Get Is Product
 	 *
-	 * @return boolean $isProduct
+	 * @return boolean
 	 */
 	public function getIsProduct() {
 		return $this->isProduct;
 	}
 
 	/**
-	 * Sets the isProduct
+	 * Set Is Product
 	 *
 	 * @param boolean $isProduct
 	 * @return void
@@ -107,7 +99,7 @@ class Tx_JccQuicklinks_Domain_Model_Link extends Tx_Extbase_DomainObject_Abstrac
 	}
 
 	/**
-	 * Returns the boolean state of isProduct
+	 * Is Is Product
 	 *
 	 * @return boolean
 	 */
@@ -116,16 +108,16 @@ class Tx_JccQuicklinks_Domain_Model_Link extends Tx_Extbase_DomainObject_Abstrac
 	}
 
 	/**
-	 * Returns the product
+	 * Get Product
 	 *
-	 * @return integer $product
+	 * @return integer
 	 */
 	public function getProduct() {
 		return $this->product;
 	}
 
 	/**
-	 * Sets the product
+	 * Set Product
 	 *
 	 * @param integer $product
 	 * @return void
@@ -135,16 +127,16 @@ class Tx_JccQuicklinks_Domain_Model_Link extends Tx_Extbase_DomainObject_Abstrac
 	}
 
 	/**
-	 * Returns the link
+	 * Get Link
 	 *
-	 * @return string $link
+	 * @return string
 	 */
 	public function getLink() {
 		return $this->link;
 	}
 
 	/**
-	 * Sets the link
+	 * Set Link
 	 *
 	 * @param string $link
 	 * @return void
@@ -154,16 +146,16 @@ class Tx_JccQuicklinks_Domain_Model_Link extends Tx_Extbase_DomainObject_Abstrac
 	}
 	
 	/**
-	 * Returns the page
+	 * Get Page
 	 *
-	 * @return integer $page
+	 * @return integer
 	 */
 	public function getPage() {
 		return $this->page;
 	}
 
 	/**
-	 * Sets the page
+	 * Set Page
 	 *
 	 * @param integer $page
 	 * @return void
@@ -171,5 +163,5 @@ class Tx_JccQuicklinks_Domain_Model_Link extends Tx_Extbase_DomainObject_Abstrac
 	public function setPage($page) {
 		$this->page = $page;
 	}
+	
 }
-?>

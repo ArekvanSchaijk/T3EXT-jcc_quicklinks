@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2015-08-26T17:59:59Z" product-name="jcc_quicklinks">
+    <header/>
+    <body>
+      <trans-unit id="tabs.jccquicklinks" approved="yes">
+        <source>JCC Quicklinks</source>
+      </trans-unit>
+      <trans-unit id="tabs.jccquicklinks.tx_jccquicklinks_title" approved="yes">
+        <source>Alternative title</source>
+      </trans-unit>
+      <trans-unit id="tabs.jccquicklinks.tx_jccquicklinks_links">
+        <source>Links</source>
+      </trans-unit>
+      <trans-unit id="tx_jccquicklinks_domain_model_link">
+        <source>Link</source>
+      </trans-unit>
+      <trans-unit id="tx_jccquicklinks_domain_model_link.name" approved="yes">
+        <source>Name</source>
+      </trans-unit>
+      <trans-unit id="tx_jccquicklinks_domain_model_link.is_product">
+        <source>Is Product</source>
+      </trans-unit>
+      <trans-unit id="tx_jccquicklinks_domain_model_link.product">
+        <source>Product</source>
+      </trans-unit>
+      <trans-unit id="tx_jccquicklinks_domain_model_link.product.0" approved="yes">
+        <source>-- select --</source>
+      </trans-unit>
+      <trans-unit id="tx_jccquicklinks_domain_model_link.link">
+        <source>Link</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

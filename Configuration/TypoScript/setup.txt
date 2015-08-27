@@ -7,12 +7,12 @@ plugin.tx_jccquicklinks {
 	}
 }
 
-
 lib.jccquicklinks = USER_INT
 lib.jccquicklinks {
-    userFunc = tx_extbase_core_bootstrap->run
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     pluginName = Pi1
     extensionName = JccQuicklinks
+	vendorName = Ucreation
     controller = Link
     action = list
     view =< plugin.tx_jccquicklinks.view
