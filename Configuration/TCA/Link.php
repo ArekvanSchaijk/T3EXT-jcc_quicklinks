@@ -97,7 +97,7 @@ $TCA['tx_jccquicklinks_domain_model_link'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim'
+				'eval' => 'trim,required'
 			),
 		),
 		'is_product' => array(
